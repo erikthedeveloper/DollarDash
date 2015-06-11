@@ -1,0 +1,21 @@
+{
+    "name": "erikaybar/dollar-dash",
+    "description": "A Treasure Chest of Functional Goodness and Normalized Sanity for PHP. Basically, Lodash for PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erik Aybar",
+            "email": "erikthedeveloper@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^4.7"
+    },
+    "autoload": {
+      "psr-4": {"Eaybar\\DollarDash\\": "src/"}
+    },
+    "autoload-dev": {
+      "classmap": ["test/"]
+    }
+}
