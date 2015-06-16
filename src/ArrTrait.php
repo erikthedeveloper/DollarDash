@@ -123,4 +123,63 @@ trait ArrTrait
 
         return $array;
     }
+
+    /**
+     * This method is like _.find except that it returns the index of the first element predicate returns truthy for
+     * instead of the element itself.
+     * @param $array
+     * @param $test
+     * @return int|string
+     */
+    public static function findIndex($array, $test)
+    {
+        foreach ($array as $key => $value) {
+            if ($test($value)) {
+                return $key;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Gets the first element of array.
+     * @param $array
+     * @return mixed
+     */
+    public static function first($array)
+    {
+        return array_shift($array);
+    }
+
+    /**
+     * Removes all provided values from array using SameValueZero for equality comparisons.
+     * Note: Unlike _.without, this method mutates array.
+     * @param $array
+     * @param $_values
+     * @return array
+     */
+    public static function pull(&$array, $_values)
+    {
+        $values = array_slice(func_get_args(), 1);
+        $array = array_values(
+            array_diff($array, $values)
+        );
+
+        return $array;
+    }
+
+    /**
+     * Creates an array excluding all provided values using SameValueZero for equality comparisons.
+     * @param $array
+     * @param $_values
+     * @return array
+     */
+    public static function without($array, $_values)
+    {
+        $values = array_slice(func_get_args(), 1);
+        return array_values(
+            array_diff($array, $values)
+        );
+    }
 }

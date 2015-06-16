@@ -20,7 +20,7 @@ class ArrayFunctionsTest extends TestCase
         $this->assertEquals([1, 2, 3], $compacted);
     }
 
-    function test_array_difference()
+    public function test_array_difference()
     {
         $original_01 = [1, 2, 3, 9];
         $original_02 = [4, 2];
@@ -105,4 +105,48 @@ class ArrayFunctionsTest extends TestCase
         );
     }
 
+    public function test_array_findIndex()
+    {
+        $users = [
+            ['user' => 'barney', 'active' => false],
+            ['user' => 'fred', 'active' => false],
+            ['user' => 'pebbles', 'active' => true]
+        ];
+
+        $this->assertEquals(
+            1,
+            Arr::findIndex($users, function ($user) {
+                return $user['user'] == 'fred';
+            })
+        );
+
+        $this->assertEquals(
+            -1,
+            Arr::findIndex($users, function ($user) {
+                return $user['user'] == 'billy';
+            })
+        );
+    }
+
+    public function test_array_first()
+    {
+        $target = [4, 5, 6];
+        $this->assertEquals(4, Arr::first($target));
+        $this->assertCount(3, $target);
+        $this->assertEquals(null, Arr::first([]));
+    }
+
+    public function test_array_pull()
+    {
+        $target = [1, 2, 3, 1, 2, 3];
+        $this->assertEquals([1, 1], Arr::pull($target, 2, 3));
+        $this->assertEquals([1, 1], $target);
+    }
+
+    public function test_array_without()
+    {
+        $target = [1, 2, 3, 1, 2, 3];
+        $this->assertEquals([1, 1], Arr::without($target, 2, 3));
+        $this->assertCount(6, $target);
+    }
 }
