@@ -33,4 +33,15 @@ class ChainTest extends TestCase
                       ->first()
         );
     }
+
+    public function test_chain_array_method_into_collection_value_method()
+    {
+        $this->assertTrue(
+            DollarDash::chain([1, 2, 3, 4, 5])
+                      ->without(4)
+                      ->every(function ($item) {
+                          return $item !== 4;
+                      })
+        );
+    }
 }

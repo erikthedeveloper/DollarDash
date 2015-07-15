@@ -10,6 +10,7 @@ class DollarDash
 
     use ArrTrait;
     use ObjectTrait;
+    use CollectionTrait;
 
     public static function chain($value)
     {
