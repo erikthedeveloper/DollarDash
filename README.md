@@ -9,24 +9,31 @@ _Currently_, **much of the documentation and test cases** are either very closel
 
 ~~Much~~ All real credit goes to the [lodash contributors](https://github.com/lodash/lodash/graphs/contributors)
 
-#### Installation and Example Usages
+### Example Usages
 
-Method Chaining
+#### Method Chaining
 ```php
 use Eaybar\DollarDash\DollarDash as Dash;
 
 Dash::chain([1, 2, 3, 1, 2, 3])
-  ->without(2, 3)
-  ->first();
+      ->without(2, 3)
+      ->first();
 // -> 1
 
 Dash::chain([1, 2, 3, 1, 2, 3])
-  ->without(2, 3)
-  ->value();
+      ->without(2, 3)
+      ->value();
 // -> [1, 1]
+
+Dash::chain([1, 2, 3, 4, 5])
+      ->without(4)
+      ->every(function ($item) {
+          return $item !== 4;
+      });
+// -> true
 ```
 
-Import the kitchen sink
+#### Import the kitchen sink
 ```php
 use Eaybar\DollarDash\DollarDash as Dash;
 
@@ -37,9 +44,19 @@ Dash::dropRightWhile([0, 1, 2, 3], function ($element, $index, $array) {
 
 Dash::compact([0, 1, false, 2, '', 3]);
 // -> [1, 2, 3]
+
+Dash::every([2, 4, 6], function ($item) {
+    return $item > 1;
+});
+// -> true
+
+Dash::some([2, 3, 6], function ($item) {
+    return $item < 3;
+});
+// -> true
 ```
 
-Import by module
+#### Import by module
 ```php
 use Eaybar\DollarDash\Arr;
 
@@ -54,7 +71,7 @@ Arr::compact([0, 1, false, 2, '', 3]);
 
 **W**ork **I**n **P**rogress. For example usage and to see it in action, head over the the `test/` directory and/or the [Lodash documentation](https://lodash.com/docs)
 
-#### Current Features/Test Coverage see `test/`
+### Current Features/Test Coverage see `test/`
 
 ArrayFunctions
 - [x] test array chunk
@@ -73,6 +90,16 @@ Chain
 - [x] test chain instance
 - [x] test chain array chainable method
 - [x] test chain array chainable into value method
+- [x] test chain array method into collection value method
+
+CollectionFunctions
+- [x] test collection every
+- [x] test collection every has alias all
+- [x] test collection some
+- [x] test collection some has alias any
+
+ObjectFunctions
+- [x] test object assign
 
 #### Thoughts? Comments?
 
