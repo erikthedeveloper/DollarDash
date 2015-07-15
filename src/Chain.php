@@ -27,12 +27,12 @@ class Chain
 
     public function __call($method_name, $arguments)
     {
-        if (!method_exists(ChainProxy::class, $method_name)) {
+        if (!method_exists(DollarDash::class, $method_name)) {
             throw new \Exception("WTF no {$method_name} method...");
         }
 
         array_unshift($arguments, $this->value);
-        $result = call_user_func_array([ChainProxy::class, $method_name], $arguments);
+        $result = call_user_func_array([DollarDash::class, $method_name], $arguments);
 
         if (array_search($method_name, static::$non_chainable_methods)) {
             return $result;
@@ -43,10 +43,4 @@ class Chain
     }
 
 
-}
-
-class ChainProxy
-{
-    use ArrTrait;
-    use ObjectTrait;
 }
