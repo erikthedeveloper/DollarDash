@@ -48,6 +48,20 @@ trait CollectionTrait
     }
 
     /**
+     * Iterates over elements of collection, returning an array of all elements predicate returns truthy for.
+     * @param mixed|array $collection
+     * @param callable    $predicate
+     * @return array
+     */
+    public static function filter($collection, $predicate)
+    {
+        // TODO: Consider how to treat array vs. associative array vs. other iterables?
+        return array_values(
+            array_filter($collection, $predicate)
+        );
+    }
+
+    /**
      * @see CollectionTrait::every
      * @param array    $collection
      * @param callable $testFunc

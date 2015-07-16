@@ -58,4 +58,21 @@ class CollectionFunctionsTest extends TestCase
             })
         );
     }
+
+    public function test_collection_filter()
+    {
+        $this->assertNotContains(
+            'joe',
+            Collection::filter(['bob', 'joe', 'sally', 'joe'], function ($item) {
+                return $item !== 'joe';
+            })
+        );
+
+        $this->assertEquals(
+            ['bob', 'sally'],
+            Collection::filter(['bob', 'joe', 'sally', 'joe'], function ($item) {
+                return $item !== 'joe';
+            })
+        );
+    }
 }
